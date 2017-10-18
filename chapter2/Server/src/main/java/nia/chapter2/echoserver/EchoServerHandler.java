@@ -20,6 +20,9 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
         ByteBuf in = (ByteBuf) msg;
         System.out.println(
                 "Server received: " + in.toString(CharsetUtil.UTF_8));
+        //这里的write是异步的,所以这里继承的是ChannelInboundHandlerAdapter,其
+        //与SimpleChannelInboundHandler不同的地方在于ChannelInboundHandlerAdapter
+        //在这个地方不会释放ByteBuf的内存引用
         ctx.write(in);
     }
 
@@ -32,7 +35,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx,
-        Throwable cause) {
+                                Throwable cause) {
         cause.printStackTrace();
         ctx.close();
     }
