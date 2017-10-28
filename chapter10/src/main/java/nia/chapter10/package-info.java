@@ -1,7 +1,7 @@
 /**
  * Created by kerr.
  *
- * Listing 10.1 Class ToIntegerDecoder extends ByteToMessageDecoder {@link nia.chapter10.ToIntegerDecoder}
+ * Listing 10.1 Class ToIntegerDecoderTest extends ByteToMessageDecoder {@link nia.chapter10.ToIntegerDecoder}
  *
  * Listing 10.2 Class ToIntegerDecoder2 extends ReplayingDecoder {@link nia.chapter10.ToIntegerDecoder2}
  *

@@ -10,11 +10,11 @@ import java.util.List;
  *
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
  */
-public class IntegerToStringDecoder extends
-    MessageToMessageDecoder<Integer> {
+/**注意扩展的是MessageToMessageDecoder基类*/
+public class IntegerToStringDecoder extends MessageToMessageDecoder<Integer> {
     @Override
     public void decode(ChannelHandlerContext ctx, Integer msg,
-        List<Object> out) throws Exception {
+                       List<Object> out) throws Exception {
         out.add(String.valueOf(msg));
     }
 }

@@ -22,27 +22,26 @@ public class BootstrapClient {
 
     /**
      * Listing 8.1 Bootstrapping a client
-     * */
+     */
     public void bootstrap() {
         EventLoopGroup group = new NioEventLoopGroup();
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.group(group)
-            .channel(NioSocketChannel.class)
-            .handler(new SimpleChannelInboundHandler<ByteBuf>() {
-                @Override
-                protected void channelRead0(
-                    ChannelHandlerContext channelHandlerContext,
-                    ByteBuf byteBuf) throws Exception {
-                    System.out.println("Received data");
-                }
+                .channel(NioSocketChannel.class)
+                .handler(new SimpleChannelInboundHandler<ByteBuf>() {
+                    @Override
+                    protected void channelRead0(ChannelHandlerContext channelHandlerContext
+                            , ByteBuf byteBuf) throws Exception {
+                        System.out.println("Received data");
+                    }
                 });
         ChannelFuture future =
-            bootstrap.connect(
-                    new InetSocketAddress("www.manning.com", 80));
+                bootstrap.connect(
+                        new InetSocketAddress("www.manning.com", 80));
         future.addListener(new ChannelFutureListener() {
             @Override
             public void operationComplete(ChannelFuture channelFuture)
-                throws Exception {
+                    throws Exception {
                 if (channelFuture.isSuccess()) {
                     System.out.println("Connection established");
                 } else {

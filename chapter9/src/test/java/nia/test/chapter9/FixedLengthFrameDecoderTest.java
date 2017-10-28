@@ -2,7 +2,9 @@ package nia.test.chapter9;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelInitializer;
 import io.netty.channel.embedded.EmbeddedChannel;
+import io.netty.channel.socket.SocketChannel;
 import nia.chapter9.FixedLengthFrameDecoder;
 import org.junit.Test;
 
@@ -21,8 +23,12 @@ public class FixedLengthFrameDecoderTest {
             buf.writeByte(i);
         }
         ByteBuf input = buf.duplicate();
-        EmbeddedChannel channel = new EmbeddedChannel(
-            new FixedLengthFrameDecoder(3));
+        EmbeddedChannel channel = new EmbeddedChannel(new ChannelInitializer<EmbeddedChannel>() {
+            @Override
+            protected void initChannel(EmbeddedChannel ec) throws Exception {
+                ec.pipeline().addLast(new FixedLengthFrameDecoder(3));
+            }
+        });
         // write bytes
         assertTrue(channel.writeInbound(input.retain()));
         assertTrue(channel.finish());
@@ -52,8 +58,7 @@ public class FixedLengthFrameDecoderTest {
         }
         ByteBuf input = buf.duplicate();
 
-        EmbeddedChannel channel = new EmbeddedChannel(
-            new FixedLengthFrameDecoder(3));
+        EmbeddedChannel channel = new EmbeddedChannel(new FixedLengthFrameDecoder(3));
         assertFalse(channel.writeInbound(input.readBytes(2)));
         assertTrue(channel.writeInbound(input.readBytes(7)));
 

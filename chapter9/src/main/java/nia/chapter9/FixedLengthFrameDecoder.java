@@ -11,20 +11,20 @@ import java.util.List;
  *
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
  */
+/**固定长度成帧器*/
 public class FixedLengthFrameDecoder extends ByteToMessageDecoder {
     private final int frameLength;
 
     public FixedLengthFrameDecoder(int frameLength) {
         if (frameLength <= 0) {
             throw new IllegalArgumentException(
-                "frameLength must be a positive integer: " + frameLength);
+                    "frameLength must be a positive integer: " + frameLength);
         }
         this.frameLength = frameLength;
     }
 
     @Override
-    protected void decode(ChannelHandlerContext ctx, ByteBuf in,
-        List<Object> out) throws Exception {
+    protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
         while (in.readableBytes() >= frameLength) {
             ByteBuf buf = in.readBytes(frameLength);
             out.add(buf);

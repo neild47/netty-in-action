@@ -20,9 +20,8 @@ public class FrameChunkDecoder extends ByteToMessageDecoder {
     }
 
     @Override
-    protected void decode(ChannelHandlerContext ctx, ByteBuf in,
-        List<Object> out)
-        throws Exception {
+    protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out)
+            throws Exception {
         int readableBytes = in.readableBytes();
         if (readableBytes > maxFrameSize) {
             // discard the bytes

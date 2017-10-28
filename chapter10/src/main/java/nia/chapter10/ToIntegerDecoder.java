@@ -7,7 +7,7 @@ import io.netty.handler.codec.ByteToMessageDecoder;
 import java.util.List;
 
 /**
- * Listing 10.1 Class ToIntegerDecoder extends ByteToMessageDecoder
+ * Listing 10.1 Class ToIntegerDecoderTest extends ByteToMessageDecoder
  *
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
  */
